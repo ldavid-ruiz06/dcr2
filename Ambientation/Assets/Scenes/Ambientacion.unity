@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.115431935, g: 0.14557949, b: 0.17922437, a: 1}
+  m_IndirectSpecularColor: {r: 0.11535882, g: 0.145558, b: 0.17943887, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3589,8 +3589,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657614474770936788, guid: a9e0296db48d4574b8b759d755637f54, type: 3}
   m_PrefabInstance: {fileID: 2657614474510799741}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &294609066 stripped
-Transform:
+--- !u!224 &294609066 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 2657614474770936791, guid: a9e0296db48d4574b8b759d755637f54, type: 3}
   m_PrefabInstance: {fileID: 2657614474510799741}
   m_PrefabAsset: {fileID: 0}
@@ -15916,6 +15916,12 @@ MonoBehaviour:
   knownRouteChangeRate: 0.5
   updateKnownRoutes: 0
   enableRouteConsensus: 0
+  isFuzzy: 0
+  proportion: 1
+  fixedAge: 0
+  fixedAgeValue: 0.5
+  fixedEnergy: 0
+  fixedEnergyValue: 0.5
   maxHunger: 1
   initialHunger: 0.5
   hungerThreshold: 0.7
@@ -15931,6 +15937,7 @@ MonoBehaviour:
   lifeExpectation: 1200
   deathFunctionCallTime: 30
   enableDeathByAge: 0
+  randomAge: 0
   bodySize: 2
   minSizeScale: 0.5
   maxSizeScale: 1.5
@@ -15966,11 +15973,17 @@ MonoBehaviour:
   maxHuntingRange: 20
   followingPreyMaxTime: 15
   huntingSuccessRate: 0.4
+  hidingLayer:
+    serializedVersion: 2
+    m_Bits: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
   obstacleSearchingRange: 8
   obstacleRelevantDistance: 15
+  combinedLayer:
+    serializedVersion: 2
+    m_Bits: 0
   preferedSwimmingDepth: -40
   preferedSwimmingDepthRange: 10
   couzinDirectionWeight: 1
@@ -15979,6 +15992,7 @@ MonoBehaviour:
   predatorAvoidanceDirectionWeight: 1
   preyFollowingDirectionWeight: 4
   swimmingDepthDirectionWeight: 2
+  hidingDirectionWeight: 100
   normalSpeed: 2
   escapeSpeed: 4
   huntingSpeed: 3
@@ -18282,12 +18296,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\nProyecto terminal\n\nComportamientos desarrollados por:\r\n-Humberto
-    de Jes\xFAs Jim\xE9nez Guti\xE9rrez\r\n-Kevin Zahid Cruz Bravo\r\n-Ricardo Gonz\xE1lez
-    Jara\n\nAsesor - Dr.Hector Fernando Gom\xE9z\nCoasesor - Dr. David Israel Flores
-    Granados\nBeneficiario - Dr. Jos\xE9 Ad\xE1n Caballero Vazquez\n\nTodos los modelos
-    fueron sacados de la p\xE1gina \nSketcfab.\n\nLa m\xFAsica utilizada en el proyecto
-    fue sacada de ZapSplat."
+  m_Text: "\nProyecto de investigaci\xF3n FIPI\n\nInvestigador principal: Dr. David
+    Israel Flores Granados\nCoIP: Dr. Jos\xE9 Ad\xE1n Caballero Vazquez\n\nDesarrolladores
+    del proyecto:\n-Humberto de Jes\xFAs Jim\xE9nez Guti\xE9rrez\r\n-Kevin Zahid
+    Cruz Bravo\r\n-Ricardo Gonz\xE1lez Jara\n\nAsesor - Dr.Hector Fernando Gom\xE9z\nCoasesor
+    - Dr. David Israel Flores Granados\nBeneficiario - Dr. Jos\xE9 Ad\xE1n Caballero
+    Vazquez\n\nTodos los modelos fueron sacados de la p\xE1gina \nSketcfab.\n\nLa
+    m\xFAsica utilizada en el proyecto fue sacada de ZapSplat."
 --- !u!222 &1405902879
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21166,6 +21181,12 @@ MonoBehaviour:
   knownRouteChangeRate: 0.5
   updateKnownRoutes: 1
   enableRouteConsensus: 0
+  isFuzzy: 0
+  proportion: 1
+  fixedAge: 0
+  fixedAgeValue: 0.5
+  fixedEnergy: 0
+  fixedEnergyValue: 0.5
   maxHunger: 1
   initialHunger: 0.6
   hungerThreshold: 0.4
@@ -21181,6 +21202,7 @@ MonoBehaviour:
   lifeExpectation: 1200
   deathFunctionCallTime: 30
   enableDeathByAge: 0
+  randomAge: 0
   bodySize: 4
   minSizeScale: 1
   maxSizeScale: 1.5
@@ -21217,11 +21239,17 @@ MonoBehaviour:
   maxHuntingRange: 20
   followingPreyMaxTime: 15
   huntingSuccessRate: 1
+  hidingLayer:
+    serializedVersion: 2
+    m_Bits: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
   obstacleSearchingRange: 8
   obstacleRelevantDistance: 15
+  combinedLayer:
+    serializedVersion: 2
+    m_Bits: 0
   preferedSwimmingDepth: -40
   preferedSwimmingDepthRange: 5
   couzinDirectionWeight: 0.5
@@ -21230,6 +21258,7 @@ MonoBehaviour:
   predatorAvoidanceDirectionWeight: 1
   preyFollowingDirectionWeight: 4
   swimmingDepthDirectionWeight: 2
+  hidingDirectionWeight: 100
   normalSpeed: 2
   escapeSpeed: 2
   huntingSpeed: 2
