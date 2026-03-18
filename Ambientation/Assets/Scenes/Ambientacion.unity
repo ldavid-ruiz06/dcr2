@@ -18296,12 +18296,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\nProyecto de investigaci\xF3n FIPI\n\nInvestigador principal: Dr. David
-    Israel Flores Granados\nCoIP: Dr. Jos\xE9 Ad\xE1n Caballero Vazquez\n\nDesarrolladores
-    del proyecto:\n-Humberto de Jes\xFAs Jim\xE9nez Guti\xE9rrez\r\n-Kevin Zahid
-    Cruz Bravo\r\n-Ricardo Gonz\xE1lez Jara\n\nAsesor - Dr.Hector Fernando Gom\xE9z\nCoasesor
-    - Dr. David Israel Flores Granados\nBeneficiario - Dr. Jos\xE9 Ad\xE1n Caballero
-    Vazquez\n\nTodos los modelos fueron sacados de la p\xE1gina \nSketcfab.\n\nLa
+  m_Text: "Investigador Principal:\r\nDr. David I Flores Granados\r\nUniversidad
+    de Puerto Rico, Recinto de R\xEDo Piedras, Departamento de Ciencia de C\xF3mputos\r\n\r\nCo-Investigador
+    Principal:\r\nDr. Ad\xE1n Caballero V\xE1zquez\r\nUnidad de Ciencias del Agua,
+    Centro de Investigaci\xF3n Cient\xEDfica de Yucat\xE1n. A.C. \r\nEdwin Hernandez\r\nUniversidad
+    de Puerto Rico, Recinto de R\xEDo Piedras, Departamento de Estudios Interdisciplinarios\n\r\nColaboradores
+    en la Universidad del Caribe:\r\nDr. Fernado G\xF3mez Garc\xEDa\r\nCruz Bravo
+    Kevin Zahid \r\nGonz\xE1lez Jara Ricardo \r\nJim\xE9nez Gutierrez Humberto de
+    Jes\xFAs\r\nJos\xE9 Manuel Alarc\xF3n Angel\r\nAlejandro Bores Rivera\r\nKarla
+    Gabriela Roblero Cano\n\nTodos los modelos fueron sacados de la p\xE1gina \nSketcfab.\n\nLa
     m\xFAsica utilizada en el proyecto fue sacada de ZapSplat."
 --- !u!222 &1405902879
 CanvasRenderer:
