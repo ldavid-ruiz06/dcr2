@@ -83,7 +83,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758966380011270821}
-  m_Mesh: {fileID: -3071380337512292834, guid: 44ea919590270cd4e9f5dca4315edcf8, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &9207549826423531773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +93,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 758966380011270821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ab3df1642e65749938cd64025662cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 297759c6f1fd8734b8c72e2a80a5766c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  schoolID: 3
+  normalSpeed: 0.1
+  acceleration: 0.1
+  rotationSpeed: 5.4
+  couzinDirectionWeight: 1
+  centroidFollowingDirectionWeight: 4
+  minCentroidDistance: 0
+  maxCentroidDistance: 5
+  alpha: 3
+  rho: 2

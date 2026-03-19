@@ -615,7 +615,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3693033755697080248}
@@ -635,14 +635,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297759c6f1fd8734b8c72e2a80a5766c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  schoolID: 2
+  schoolID: 1
   normalSpeed: 0.3
-  acceleration: 1
+  acceleration: 0.5
   rotationSpeed: 3.2
   couzinDirectionWeight: 1
   centroidFollowingDirectionWeight: 2
   minCentroidDistance: 10
-  maxCentroidDistance: 30
+  maxCentroidDistance: 12
   alpha: 2
   rho: 10
 --- !u!1 &3693033755697380252
