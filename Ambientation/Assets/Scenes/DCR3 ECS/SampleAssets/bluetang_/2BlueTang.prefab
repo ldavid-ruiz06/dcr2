@@ -637,12 +637,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   schoolID: 1
   normalSpeed: 0.3
-  acceleration: 0.5
+  acceleration: 1
   rotationSpeed: 3.2
   couzinDirectionWeight: 1
   centroidFollowingDirectionWeight: 2
   minCentroidDistance: 10
-  maxCentroidDistance: 12
+  maxCentroidDistance: 30
   alpha: 2
   rho: 10
 --- !u!1 &3693033755697380252
