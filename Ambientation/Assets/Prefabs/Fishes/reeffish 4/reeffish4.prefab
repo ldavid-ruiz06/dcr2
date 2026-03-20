@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 193763209610409407}
   - component: {fileID: 8954635416544346847}
   - component: {fileID: 4136331721273117335}
+  - component: {fileID: 4243894837530064735}
   m_Layer: 6
   m_Name: reeffish4
   m_TagString: reefFish4
@@ -254,6 +255,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 3, z: 10}
   m_Center: {x: 0, y: 0, z: -1.5}
+--- !u!114 &4243894837530064735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4486779068138296430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297759c6f1fd8734b8c72e2a80a5766c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  schoolID: 2
+  normalSpeed: 0.1
+  acceleration: 1
+  rotationSpeed: 1
+  couzinDirectionWeight: 1
+  centroidFollowingDirectionWeight: 2
+  minCentroidDistance: 0
+  maxCentroidDistance: 3
+  alpha: 0.1
+  rho: 0.2
 --- !u!1 &4486779068138296432
 GameObject:
   m_ObjectHideFlags: 0

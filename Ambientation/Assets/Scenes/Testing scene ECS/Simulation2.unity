@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867cd2f85fc6e59429d575df77b12c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  schoolPrefab: {fileID: 1501737747371270, guid: fcac354156cb0c24891033bbe736d224, type: 3}
+  schoolPrefab: {fileID: 4486779068138296430, guid: 2a93c02281f943b45a176953ef8d1b9f, type: 3}
   spawnRadius: 1
   spawnCount: 10
   spawnType: 0
