@@ -428,7 +428,7 @@ namespace DCR2
                 //fish.currentSpeed = Mathf.Lerp(fish.currentSpeed, speed, 1f * deltaTime);
 
                 //float3 delayDirection = math.lerp(forward, preferredDirection,rotationSpeed * deltaTime);
-                float3 delayDirection = math.lerp(forward, preferredDirection,rotationSpeed * deltaTime);
+                float3 delayDirection = math.lerp(forward, preferredDirection, rotationSpeed * deltaTime);
 
                 localToWorld = new LocalToWorld
                 {
