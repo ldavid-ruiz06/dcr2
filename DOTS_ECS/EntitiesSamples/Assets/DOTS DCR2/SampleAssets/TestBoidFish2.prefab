@@ -93,6 +93,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 758966380011270821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ab3df1642e65749938cd64025662cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 297759c6f1fd8734b8c72e2a80a5766c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  schoolID: 2
+  normalSpeed: 0.3
+  acceleration: 1
+  rotationSpeed: 3.2
+  couzinDirectionWeight: 1
+  centroidFollowingDirectionWeight: 4
+  minCentroidDistance: 30
+  maxCentroidDistance: 100
+  alpha: 6
+  rho: 10

@@ -79,6 +79,9 @@ namespace DCR2
                 float3 translation = matrix.c3.xyz;
                 quaternion rotation = new quaternion(matrix);
                 float3 scale = new float3(math.length(matrix.c0.xyz), math.length(matrix.c1.xyz), math.length(matrix.c2.xyz));
+                
+                
+                
                 /*
                 Debug.LogFormat("School: {0}, SchoolLocalToWorld {1}, Entity: {2}", school.ValueRO, schoolLocalToWorld.ValueRO, entity);
                 Debug.LogFormat("School -> SpawnRadius: {0}, SpawnCount: {1} :: LocalToWorld -> Position: {2}, Rotation: {3}, Scale: {4}, InstanceID: {5}",

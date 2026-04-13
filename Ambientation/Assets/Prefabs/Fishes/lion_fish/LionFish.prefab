@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2837208067694443934}
   - component: {fileID: -7243307313606722800}
   - component: {fileID: 1867166758721756405}
+  - component: {fileID: 6419437821841557913}
   m_Layer: 6
   m_Name: LionFish
   m_TagString: lionFish
@@ -180,6 +181,28 @@ MonoBehaviour:
   individualEnergyIncrement: 0
   individualEnergyDecrement: 0
   assignedFrame: 0
+--- !u!114 &6419437821841557913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311940997995656126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297759c6f1fd8734b8c72e2a80a5766c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  schoolID: 0
+  normalSpeed: 0.03
+  acceleration: 1
+  rotationSpeed: 3
+  couzinDirectionWeight: 2
+  centroidFollowingDirectionWeight: 1
+  minCentroidDistance: 0
+  maxCentroidDistance: 3
+  alpha: 2
+  rho: 1
 --- !u!1 &366491135774204291
 GameObject:
   m_ObjectHideFlags: 0

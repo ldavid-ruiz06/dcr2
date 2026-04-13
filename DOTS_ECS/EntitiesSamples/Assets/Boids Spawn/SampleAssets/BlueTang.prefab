@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 6493240038386168643}
   - component: {fileID: 80202512984703805}
   - component: {fileID: -1494770853528022172}
+  - component: {fileID: 4832083027577170506}
   m_Layer: 0
   m_Name: BlueTang
   m_TagString: blueTang
@@ -623,7 +624,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 1e7ce65e8f3414bf8a3a0c2ae659dbc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -653,6 +654,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3693033755697380250}
   m_Mesh: {fileID: -3071380337512292834, guid: 44ea919590270cd4e9f5dca4315edcf8, type: 3}
+--- !u!114 &4832083027577170506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3693033755697380250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297759c6f1fd8734b8c72e2a80a5766c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  schoolID: 2
+  normalSpeed: 0.03
+  acceleration: 1
+  rotationSpeed: 3.2
+  couzinDirectionWeight: 1
+  centroidFollowingDirectionWeight: 4
+  minCentroidDistance: 3
+  maxCentroidDistance: 10
+  alpha: 6
+  rho: 10
 --- !u!1 &3693033755697380252
 GameObject:
   m_ObjectHideFlags: 0

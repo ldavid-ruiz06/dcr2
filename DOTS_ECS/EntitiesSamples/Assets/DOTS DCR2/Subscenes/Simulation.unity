@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.17646259, g: 0.22086684, b: 0.30318043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867cd2f85fc6e59429d575df77b12c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  schoolPrefab: {fileID: 1501737747371270, guid: fcac354156cb0c24891033bbe736d224,
+  schoolPrefab: {fileID: 75490146368986052, guid: 1fae39de0d5fb564296a9c97a0e0c7bd,
     type: 3}
   spawnRadius: 1
   spawnCount: 10
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centroidPrefab: {fileID: 4283189356725638952, guid: d060a894868b26947951105566ff0d01,
     type: 3}
-  showCentroid: 0
+  showCentroid: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

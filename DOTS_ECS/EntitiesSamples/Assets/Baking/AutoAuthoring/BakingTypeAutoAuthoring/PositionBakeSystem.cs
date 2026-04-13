@@ -23,8 +23,10 @@ namespace Baking.AutoAuthoring.BakingTypeAutoAuthoring
                          .WithAll<BakedEntity>()
                          .WithOptions(EntityQueryOptions.IncludeDisabledEntities | EntityQueryOptions.IncludePrefab))
             {
+                // transform.ValueRW = LocalTransform.FromPositionRotation(complex.ValueRO.Properties.Position,
+                //     quaternion.Euler(math.radians(complex.ValueRO.Properties.Rotation)));
                 transform.ValueRW = LocalTransform.FromPositionRotation(complex.ValueRO.Properties.Position,
-                    quaternion.Euler(math.radians(complex.ValueRO.Properties.Rotation)));
+                    quaternion.Euler(math.radians(0)));
             }
         }
     }

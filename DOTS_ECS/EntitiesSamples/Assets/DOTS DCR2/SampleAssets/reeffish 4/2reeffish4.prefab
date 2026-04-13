@@ -225,14 +225,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   schoolID: 2
-  normalSpeed: 0.3
+  normalSpeed: 0.03
   acceleration: 1
-  rotationSpeed: 3.2
+  rotationSpeed: 2
   couzinDirectionWeight: 1
-  centroidFollowingDirectionWeight: 2
-  minCentroidDistance: 10
-  maxCentroidDistance: 30
-  alpha: 2
+  centroidFollowingDirectionWeight: 4
+  minCentroidDistance: 3
+  maxCentroidDistance: 10
+  alpha: 6
   rho: 10
 --- !u!1 &4486779068138296432
 GameObject:
@@ -537,15 +537,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4486779068138296446}
   serializedVersion: 2
-  m_LocalRotation: {x: 1, y: -0, z: 0, w: 0.00000013315805}
-  m_LocalPosition: {x: -0, y: 0, z: 1.3551564}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1.3551564}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4486779068138457180}
   - {fileID: 4486779068138457178}
   m_Father: {fileID: 4486779068138457166}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!1 &4557903144432553818
 GameObject:
   m_ObjectHideFlags: 0

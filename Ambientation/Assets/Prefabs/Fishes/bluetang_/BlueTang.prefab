@@ -600,6 +600,7 @@ GameObject:
   - component: {fileID: 8006472994184372488}
   - component: {fileID: 3305069610850364204}
   - component: {fileID: 6493240038386168643}
+  - component: {fileID: 6878929437198417533}
   m_Layer: 10
   m_Name: BlueTang
   m_TagString: blueTang
@@ -705,6 +706,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 4, z: 8}
   m_Center: {x: 0, y: 0.75, z: -1}
+--- !u!114 &6878929437198417533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3693033755697380250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297759c6f1fd8734b8c72e2a80a5766c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  schoolID: 1
+  normalSpeed: 0.01
+  acceleration: 1
+  rotationSpeed: 1
+  couzinDirectionWeight: 2
+  centroidFollowingDirectionWeight: 1
+  minCentroidDistance: 1
+  maxCentroidDistance: 3
+  alpha: 2
+  rho: 1
 --- !u!1 &3693033755697380252
 GameObject:
   m_ObjectHideFlags: 0

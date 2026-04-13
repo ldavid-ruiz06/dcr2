@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 349555762}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -10.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   schoolPrefab: {fileID: 4486779068138296430, guid: 2a93c02281f943b45a176953ef8d1b9f, type: 3}
-  spawnRadius: 1
+  spawnRadius: 3
   spawnCount: 10
   spawnType: 0
   minMagnitude: 3
@@ -234,7 +234,7 @@ Transform:
   m_GameObject: {fileID: 2049190447}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -9.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centroidPrefab: {fileID: 4283189356725638952, guid: d060a894868b26947951105566ff0d01, type: 3}
-  showCentroid: 0
+  showCentroid: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
