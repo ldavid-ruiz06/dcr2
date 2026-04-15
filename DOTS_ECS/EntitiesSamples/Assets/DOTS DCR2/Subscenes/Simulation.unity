@@ -201,10 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867cd2f85fc6e59429d575df77b12c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  schoolPrefab: {fileID: 75490146368986052, guid: 1fae39de0d5fb564296a9c97a0e0c7bd,
+  schoolPrefab: {fileID: 4728806752449270435, guid: c4ccf4cf12e5fa8418ca40843924760a,
     type: 3}
   spawnRadius: 1
-  spawnCount: 10
+  spawnCount: 3
   spawnType: 0
   minMagnitude: 3
   maxMagnitude: 5
