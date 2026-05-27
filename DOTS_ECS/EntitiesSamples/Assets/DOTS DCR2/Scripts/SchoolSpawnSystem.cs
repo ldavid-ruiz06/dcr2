@@ -123,7 +123,8 @@ namespace DCR2
                     LocalToWorldFromEntity = localToWorldLookup,
                     Entities = schoolEntities,
                     Center = schoolLocalToWorld.ValueRO.Position,
-                    Radius = school.ValueRO.spawnRadius
+                    Radius = school.ValueRO.spawnRadius,
+                    CentroidVector = 0
                 };
 
                 //Schuedule:: Schedule job
@@ -165,6 +166,9 @@ namespace DCR2
         public NativeArray<Entity> Entities;
         public float3 Center;
         public float Radius;
+        
+        // CODE BY LUIS RUIZ
+        public float3 CentroidVector; // centroid of the school
 
         // Execute :: Built in function for jobs which is looped for each value in the school List
         public void Execute(int i)
@@ -185,7 +189,9 @@ namespace DCR2
                 Value = float4x4.TRS(pos, quaternion.LookRotationSafe(randDir, math.up()), new float3(1.0f, 1.0f, 1.0f))
             };
             LocalToWorldFromEntity[entity] = localToWorld;
+            CentroidVector += localToWorld.Position;
         }
+        
     }
 }
 

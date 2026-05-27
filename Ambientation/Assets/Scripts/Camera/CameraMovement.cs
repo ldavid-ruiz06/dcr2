@@ -70,6 +70,6 @@ public class CameraMovement : MonoBehaviour
 		{
 			movement += transform.up * climbSpeed;
 		}
-		rb.velocity = movement * normalMoveSpeed;
+		rb.linearVelocity = movement * normalMoveSpeed;
 	}
 }

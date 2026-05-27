@@ -10,6 +10,7 @@ namespace DCR2
         public GameObject schoolPrefab;
         public float spawnRadius;
         public int spawnCount;
+        public int schoolID;
 
         [Header("Test spawn variables, keep on 0 if you dont want to change the spawn types")]
         public int spawnType;
@@ -24,10 +25,12 @@ namespace DCR2
         [Header("SpawnType: 3 -> This type spawns two lines of fish, the distance between the two lines is the horizontal Distance")]
         public int horizontalDis;
 
-        /*//TODO :: Instead of doing it like this, figure out if you can instead add the gizmo as a component in runtime, instead of adding it here in the authoring (Create an entity of the gizmo-> put a flag in the entity to show or not to show gizmos -> wirte a gizmo system that looks up all the gizmos used and how they're going to move.)
-        [Header("Fake Gizmo: Show centroid")]
-        public GameObject spherePrefab;
-        public int showCentroid;*/
+        //TODO :: Instead of doing it like this, figure out if you can instead add the gizmo as a component in runtime, instead of adding it here in the authoring (Create an entity of the gizmo-> put a flag in the entity to show or not to show gizmos -> wirte a gizmo system that looks up all the gizmos used and how they're going to move.)
+        // [Header("Fake Gizmo: Show centroid")]
+        // public GameObject spherePrefab;
+        // public int showCentroid;
+
+        
 
         class Baker : Baker<SchoolSpawnAuthoring>
         {
@@ -81,6 +84,7 @@ namespace DCR2
         public Entity schoolPrefab;
         public float spawnRadius;
         public int spawnCount;
+        public int idSchool;
     }
 
     public struct TestSpawn : IComponentData
@@ -92,8 +96,9 @@ namespace DCR2
         public int horizontalDis;
     }
 
-    /*public struct GizmoCentroid : IComponentData
+    // centroid of school
+    public struct GizmoCentroid : IComponentData
     {
         public Entity spherePrefab;
-    }*/
+    }
 }
