@@ -11,6 +11,7 @@ namespace DCR2
         public float spawnRadius;
         public int spawnCount;
         public int schoolID;
+        public GameObject schoolCentroid;
 
         [Header("Test spawn variables, keep on 0 if you dont want to change the spawn types")]
         public int spawnType;
@@ -45,6 +46,8 @@ namespace DCR2
                     schoolPrefab = GetEntity(authoring.schoolPrefab, TransformUsageFlags.Dynamic),
                     spawnCount = authoring.spawnCount,
                     spawnRadius = authoring.spawnRadius,
+                    schoolID = authoring.schoolID,
+                    schoolCentroid = GetEntity(authoring.schoolCentroid, TransformUsageFlags.Dynamic)
                 });
 
                 if (authoring.spawnType != 0)
@@ -84,7 +87,8 @@ namespace DCR2
         public Entity schoolPrefab;
         public float spawnRadius;
         public int spawnCount;
-        public int idSchool;
+        public int schoolID;
+        public Entity schoolCentroid;
     }
 
     public struct TestSpawn : IComponentData

@@ -53,7 +53,8 @@ namespace DCR2
                 //Adds the DynamicSchool component to this entity
                 AddComponent(entity, new DynamicSchool
                 {
-                    centroid = authoring.transform.position
+                    centroid = authoring.transform.position,
+                    
                 });
 
                 //Adds the Fish component to this entity

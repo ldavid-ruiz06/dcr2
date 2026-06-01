@@ -71,14 +71,35 @@ namespace DCR2
                 //Create arrays where you're going to store the results from jobs
                 var couzinDirections = CollectionHelper.CreateNativeArray<CouzinValues, RewindableAllocator>(fishCount, ref world.UpdateAllocator);
                 var centroidFollowingDirections = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(fishCount, ref world.UpdateAllocator);
-                var newCentroid = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(1, ref world.UpdateAllocator);
-                newCentroid[0] = float3.zero;
-                //float3 newCentroid = float3.zero;
+                // var newCentroid = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(1, ref world.UpdateAllocator);
+                // newCentroid[0] = float3.zero;
+                //float3 newCentroid = float3.zero;\\
+                
+
+                // making it so each fish follows the centroid of its respecting school
+                // Create array of schools for centroids
+                var schoolQuery = new EntityQueryBuilder(state.WorldUpdateAllocator).WithAll<SchoolSpawn>().WithOptions(EntityQueryOptions.IncludePrefab).Build(ref state);
+                NativeArray<Entity> schoolArray = schoolQuery.ToEntityArray(Allocator.Temp);
+                
+                // resizing newCentroid to it holds one centroid per school
+                int schoolCount = schoolArray.Length;
+                var newCentroid = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(
+                    schoolCount, ref world.UpdateAllocator
+                );
+                // initialize all to float3(0,0,0)
+                for (int i = 0; i < schoolCount; i++)
+                {
+                    newCentroid[i] = float3.zero;
+                } 
+                // trying print the amount of centroids in native array (why can't I print ints???)
+                Debug.Log(FixedString.Format("School's length: {0}", schoolQuery.CalculateEntityCount()));                
+
 
                 //Is it alright to name the variables same?
                 var calculateCentroidJob = new CalculateCentroidJob
                 {
                     newCentroid = newCentroid,
+                    
                 };
                 var calculateCentroidJobHandle = calculateCentroidJob.Schedule(fishQuery, fishChunkBaseIndexJobHandle);
 
@@ -124,7 +145,7 @@ namespace DCR2
                     couzinDirections = couzinDirections,
                     centroidFollowingDirections = centroidFollowingDirections,
                     deltaTime = dt,
-                    rotationSpeed = rotationSpeed,
+                    rotationSpeed = rotationSpeed
                 };
                 
                 var assignFinalDirectionJobHandle = assignFinalDirectionJob.ScheduleParallel(fishQuery, centroidCouzinBarrierJobHandle);
@@ -451,6 +472,7 @@ namespace DCR2
 
             void Execute(in LocalToWorld localToWorld)
             {
+                //Debug.Log(newCentroid[0] + localToWorld.Position);
                 newCentroid[0] = newCentroid[0] + localToWorld.Position;
                 //Debug.LogFormat("newCentroid: {0}", newCentroid[0]);
             }

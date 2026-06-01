@@ -19,7 +19,7 @@ namespace DCR2
         {
             var fishQuery = SystemAPI.QueryBuilder().WithAll<DynamicSchool>().Build();
             NativeArray<Entity> entityArray = fishQuery.ToEntityArray(Allocator.TempJob);
-            //var centroidVal = state.EntityManager.GetComponentData<DynamicSchool>(entityArray[0]).centroid;
+            var centroidVal = state.EntityManager.GetComponentData<DynamicSchool>(entityArray[0]).centroid;
 
             var localToWorldLookup = SystemAPI.GetComponentLookup<LocalToWorld>();
             //I think this could be done in the SchoolSpawner (instantiating the centroids)
@@ -39,19 +39,24 @@ namespace DCR2
                         Value = float4x4.TRS(new float3(0f,0f,0f), quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(1.0f, 1.0f, 1.0f))
                     };
             localToWorldLookup[centroidEntityArray[0]] = localToWorldx;
-            //Debug.Log(localToWorldLookup[centroidEntityArray[0]]);
-            foreach (var (centerGizmo, entity) in
-                     SystemAPI.Query<RefRW<centroidGizmo>>()
-                         .WithEntityAccess())
-                {
-                    Debug.Log("SettingLocation");
-                    var localToWorld = new LocalToWorld
-                    {
-                        Value = float4x4.TRS(new float3(0f,0f,0f), quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(1.0f, 1.0f, 1.0f))
-                    };
-                    localToWorldLookup[entity] = localToWorld;
-                }
 
+            
+            //Debug.Log(localToWorldLookup[centroidEntityArray[0]]);
+            // foreach (var (centerGizmo, entity) in
+            //          SystemAPI.Query<RefRW<centroidGizmo>>()
+            //              .WithEntityAccess())
+            //     {
+            //         Debug.Log("SettingLocation");
+            //         var localToWorld = new LocalToWorld
+            //         {
+            //             Value = float4x4.TRS(new float3(0f,0f,0f), quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(1.0f, 1.0f, 1.0f))
+            //         };
+            //         localToWorldLookup[entity] = localToWorld;
+            //     }
+
+
+            // define the new centroid position
+            
         }
     }
 }
