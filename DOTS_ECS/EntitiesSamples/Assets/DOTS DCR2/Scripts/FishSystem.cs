@@ -24,13 +24,35 @@ namespace DCR2
 
     public partial struct FishSystem : ISystem
     {
+        // vars
+        EntityQuery schoolQuery;
+        int schoolCount;
+        // public bool schoolInstatiated = false;
+        
+        
         [BurstCompile]
+        public void OnCreate(ref SystemState state)
+        {
+            //schoolQuery = SystemAPI.QueryBuilder().WithAll<SchoolSpawn>().Build();
+            schoolCount = 0;
+        }
+
         public void OnUpdate(ref SystemState state)
         {
             //Note:: I was having a problem where the GetAllUniqueComponents function was telling me that it didnt find any entities with SemiStaticSchool component and that I couoldnt fiter with multiple shared components, which no longer appeared when I added the SemiStaticSchool component in the EntityQuery, but I'm not sure why that happened...
             var fishQuery = SystemAPI.QueryBuilder().WithAll<SemiStaticSchool>().WithAll<Fish>().WithAll<DynamicSchool>().WithAllRW<LocalToWorld>().Build();
-            var world = state.WorldUnmanaged;
             float dt = math.min(0.05f, SystemAPI.Time.DeltaTime);
+            //Debug.Log(FixedString.Format("Fish count: {0}", fishQuery.CalculateEntityCount()));
+            var world = state.WorldUnmanaged;
+
+            // creating query of schools to use for array of centroids
+            if (schoolCount == 0)
+            {
+                schoolQuery = SystemAPI.QueryBuilder().WithAll<SchoolSpawn>().Build();
+                schoolCount = schoolQuery.CalculateEntityCount();
+            }
+            Debug.Log(FixedString.Format("School count: {0}", schoolCount));
+
             
             state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
             foreach (var fishSettings in uniqueFishComponents)
@@ -71,29 +93,12 @@ namespace DCR2
                 //Create arrays where you're going to store the results from jobs
                 var couzinDirections = CollectionHelper.CreateNativeArray<CouzinValues, RewindableAllocator>(fishCount, ref world.UpdateAllocator);
                 var centroidFollowingDirections = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(fishCount, ref world.UpdateAllocator);
-                // var newCentroid = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(1, ref world.UpdateAllocator);
-                // newCentroid[0] = float3.zero;
+                //var newCentroid = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(1, ref world.UpdateAllocator);
+                //newCentroid[0] = float3.zero;
                 //float3 newCentroid = float3.zero;\\
                 
 
-                // making it so each fish follows the centroid of its respecting school
-                // Create array of schools for centroids
-                var schoolQuery = new EntityQueryBuilder(state.WorldUpdateAllocator).WithAll<SchoolSpawn>().WithOptions(EntityQueryOptions.IncludePrefab).Build(ref state);
-                NativeArray<Entity> schoolArray = schoolQuery.ToEntityArray(Allocator.Temp);
                 
-                // resizing newCentroid to it holds one centroid per school
-                int schoolCount = schoolArray.Length;
-                var newCentroid = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(
-                    schoolCount, ref world.UpdateAllocator
-                );
-                // initialize all to float3(0,0,0)
-                for (int i = 0; i < schoolCount; i++)
-                {
-                    newCentroid[i] = float3.zero;
-                } 
-                // trying print the amount of centroids in native array (why can't I print ints???)
-                Debug.Log(FixedString.Format("School's length: {0}", schoolQuery.CalculateEntityCount()));                
-
 
                 //Is it alright to name the variables same?
                 var calculateCentroidJob = new CalculateCentroidJob
