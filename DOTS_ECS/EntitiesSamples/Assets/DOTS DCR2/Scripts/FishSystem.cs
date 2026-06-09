@@ -27,6 +27,7 @@ namespace DCR2
         // vars
         EntityQuery schoolQuery;
         int schoolCount;
+        NativeArray<Entity> schoolArray;
         // public bool schoolInstatiated = false;
         
         
@@ -50,14 +51,16 @@ namespace DCR2
             {
                 schoolQuery = SystemAPI.QueryBuilder().WithAll<SchoolSpawn>().Build();
                 schoolCount = schoolQuery.CalculateEntityCount();
+                schoolArray = schoolQuery.ToEntityArray(Allocator.Temp);
             }
-            Debug.Log(FixedString.Format("School count: {0}", schoolCount));
+            Debug.Log(FixedString.Format("School count: {0}", schoolArray.Length));
 
             
             state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
             foreach (var fishSettings in uniqueFishComponents)
             {
                 fishQuery.AddSharedComponentFilter(fishSettings);
+                
 
                 var fishCount = fishQuery.CalculateEntityCount();
                 //Default value in shared component filter
@@ -81,6 +84,7 @@ namespace DCR2
                 float normalSpeed = fishSettings.normalSpeed;
                 float acceleration = fishSettings.acceleration;
                 float rotationSpeed = fishSettings.rotationSpeed;
+                int schoolID = fishSettings.schoolID;
 
 
                 //Create an array that contains each entity in this school
@@ -97,13 +101,25 @@ namespace DCR2
                 //newCentroid[0] = float3.zero;
                 //float3 newCentroid = float3.zero;\\
                 
+                // array to keep count of how many fish are in each school
+                var fishCountPerSchool = CollectionHelper.CreateNativeArray<int, RewindableAllocator>(schoolCount, ref world.UpdateAllocator);
+                // creating array of centroids
+                var newCentroid = CollectionHelper.CreateNativeArray<float3, RewindableAllocator>(schoolCount, ref world.UpdateAllocator);
+                for (int i = 0; i < schoolCount; i++)
+                {
+                    // initialize each centroid to 0 (and each schoolCount to 0 also, to reuse the same loop)
+                    newCentroid[i] = float3.zero;
+                    fishCountPerSchool[i] = 0;
+                }
+                Debug.Log(FixedString.Format("Number centroids: {0}", newCentroid.Length));
 
                 
-
                 //Is it alright to name the variables same?
                 var calculateCentroidJob = new CalculateCentroidJob
                 {
                     newCentroid = newCentroid,
+                    schoolID = schoolID,
+                    fishCountPerSchool = fishCountPerSchool,
                     
                 };
                 var calculateCentroidJobHandle = calculateCentroidJob.Schedule(fishQuery, fishChunkBaseIndexJobHandle);
@@ -112,6 +128,8 @@ namespace DCR2
                 {
                     newCentroid = newCentroid,
                     fishCount = fishCount,
+                    schoolID = schoolID,
+                    fishCountPerSchool = fishCountPerSchool,
                 };
                 var calculateCentroidMeanJobHandle = calculateCentroidMeanJob.Schedule(calculateCentroidJobHandle);
 
@@ -122,6 +140,7 @@ namespace DCR2
                     minCentroidDistance = minCentroidDistance,
                     maxCentroidDistance = maxCentroidDistance,
                     centroidFollowingDirections = centroidFollowingDirections,
+                    schoolID = schoolID,
                 };
                 var getCentroidFollowingDirectionJobHandle = getCentroidFollowingDirectionJob.ScheduleParallel(fishQuery, fishChunkBaseIndexJobHandle);
 
@@ -135,6 +154,7 @@ namespace DCR2
                     alpha = alpha,
                     rho = rho,
                     couzinDirections = couzinDirections,
+                    schoolID = schoolID,
                 };
                 var getCouzinDirectionJobHandle = getCouzinDirectionJob.ScheduleParallel(fishQuery, fishChunkBaseIndexJobHandle);
 
@@ -150,7 +170,8 @@ namespace DCR2
                     couzinDirections = couzinDirections,
                     centroidFollowingDirections = centroidFollowingDirections,
                     deltaTime = dt,
-                    rotationSpeed = rotationSpeed
+                    rotationSpeed = rotationSpeed,
+                    schoolID = schoolID,
                 };
                 
                 var assignFinalDirectionJobHandle = assignFinalDirectionJob.ScheduleParallel(fishQuery, centroidCouzinBarrierJobHandle);
@@ -158,6 +179,7 @@ namespace DCR2
                 var assignCentroidJob = new AssignCentroidJob
                 {
                     newCentroid = newCentroid,
+                    schoolID = schoolID,
                 };
                 var assignCentroidJobHandle = assignCentroidJob.ScheduleParallel(fishQuery, centroidsBarrierJobHandle);
 
@@ -187,6 +209,7 @@ namespace DCR2
             [ReadOnly] public float centroidFollowingDirectionWeight;
             [ReadOnly] public int minCentroidDistance;
             [ReadOnly] public int maxCentroidDistance;
+            [ReadOnly] public int schoolID;
 
             [NativeDisableParallelForRestriction] public NativeArray<float3> centroidFollowingDirections;
 
@@ -242,6 +265,7 @@ namespace DCR2
             [ReadOnly] public float couzinDirectionWeight;
             [ReadOnly] public float alpha;
             [ReadOnly] public float rho;
+            [ReadOnly] public int schoolID;
 
             [NativeDisableParallelForRestriction] public NativeArray<CouzinValues> couzinDirections;
             void Execute([ChunkIndexInQuery] int chunkIndexInQuery, [EntityIndexInChunk] int entityIndexInChunk, in LocalToWorld localToWorld)
@@ -359,6 +383,7 @@ namespace DCR2
 
             [ReadOnly] public float deltaTime;
             [ReadOnly] public float rotationSpeed;
+            [ReadOnly] public int schoolID;
             
 
             void Execute([ChunkIndexInQuery] int chunkIndexInQuery, [EntityIndexInChunk] int entityIndexInChunk,ref Fish fish, ref LocalToWorld localToWorld)
@@ -474,11 +499,15 @@ namespace DCR2
         partial struct CalculateCentroidJob : IJobEntity
         {
             public NativeArray<float3> newCentroid;
+            [ReadOnly] public int schoolID;
+            public NativeArray<int> fishCountPerSchool;
+            
 
             void Execute(in LocalToWorld localToWorld)
             {
                 //Debug.Log(newCentroid[0] + localToWorld.Position);
-                newCentroid[0] = newCentroid[0] + localToWorld.Position;
+                newCentroid[schoolID] = newCentroid[schoolID] + localToWorld.Position;
+                fishCountPerSchool[schoolID]++;
                 //Debug.LogFormat("newCentroid: {0}", newCentroid[0]);
             }
         }
@@ -488,12 +517,14 @@ namespace DCR2
         {
             public NativeArray<float3> newCentroid;
             [ReadOnly] public int fishCount;
+            [ReadOnly] public int schoolID;
+            [ReadOnly] public NativeArray<int> fishCountPerSchool;
 
             void Execute ()
             {
                 //Debug.Log("newCentroid: " + newCentroid[0]);
                 //Debug.LogFormat("newCentroid: {0}, fishCount: {1}", newCentroid[0], fishCount);
-                newCentroid[0] = newCentroid[0]/(float) fishCount;
+                newCentroid[schoolID] = newCentroid[schoolID]/(float) fishCountPerSchool[schoolID];
                 //Debug.LogFormat("newCentroid: {0}", newCentroid[0]);
             }
         }
@@ -502,10 +533,11 @@ namespace DCR2
         partial struct AssignCentroidJob : IJobEntity
         {
             [ReadOnly] public NativeArray<float3> newCentroid;
+            [ReadOnly] public int schoolID;
 
             void Execute(ref DynamicSchool dynamicSchool)
             {
-                dynamicSchool.centroid = newCentroid[0];
+                dynamicSchool.centroid = newCentroid[schoolID];
             }
         }
 
