@@ -524,6 +524,7 @@ namespace DCR2
             {
                 //Debug.Log("newCentroid: " + newCentroid[0]);
                 //Debug.LogFormat("newCentroid: {0}, fishCount: {1}", newCentroid[0], fishCount);
+                //Debug.Log(FixedString.Format("fishCountPerSchool: {0}", fishCountPerSchool[schoolID]));
                 newCentroid[schoolID] = newCentroid[schoolID]/(float) fishCountPerSchool[schoolID];
                 //Debug.LogFormat("newCentroid: {0}", newCentroid[0]);
             }

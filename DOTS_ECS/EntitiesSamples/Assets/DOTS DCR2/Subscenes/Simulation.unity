@@ -255,7 +255,7 @@ MonoBehaviour:
   centroidPrefab: {fileID: 4283189356725638952, guid: d060a894868b26947951105566ff0d01,
     type: 3}
   showCentroid: 1
-  centroidID: 1
+  centroidID: 2
 --- !u!1 &721126576
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ MonoBehaviour:
   centroidPrefab: {fileID: 4283189356725638952, guid: d060a894868b26947951105566ff0d01,
     type: 3}
   showCentroid: 1
-  centroidID: 0
+  centroidID: 1
 --- !u!1 &897412789
 GameObject:
   m_ObjectHideFlags: 0

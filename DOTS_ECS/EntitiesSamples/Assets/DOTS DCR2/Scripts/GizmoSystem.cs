@@ -34,11 +34,11 @@ namespace DCR2
 
             //?? its spawning the entity but I cant see it???
             //Debug.Log(centroidQuery.CalculateEntityCount());
-            var localToWorldx = new LocalToWorld
-                    {
-                        Value = float4x4.TRS(new float3(0f,0f,0f), quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(1.0f, 1.0f, 1.0f))
-                    };
-            localToWorldLookup[centroidEntityArray[0]] = localToWorldx;
+            // var localToWorldx = new LocalToWorld
+            //         {
+            //             Value = float4x4.TRS(new float3(0f,0f,0f), quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(1.0f, 1.0f, 1.0f))
+            //         };
+            // localToWorldLookup[centroidEntityArray[0]] = localToWorldx;
 
             
             //Debug.Log(localToWorldLookup[centroidEntityArray[0]]);

@@ -75,7 +75,7 @@ namespace DCR2
     [WriteGroup(typeof(LocalToWorld))]
     public struct SemiStaticSchool : ISharedComponentData
     {
-        public int schoolID;
+        public int schoolID; // considerar posible static en el futuro
         public float couzinDirectionWeight;
         public float centroidFollowingDirectionWeight;
         public int minCentroidDistance;
