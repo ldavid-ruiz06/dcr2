@@ -53,7 +53,7 @@ namespace DCR2
                 schoolCount = schoolQuery.CalculateEntityCount();
                 schoolArray = schoolQuery.ToEntityArray(Allocator.Temp);
             }
-            Debug.Log(FixedString.Format("School count: {0}", schoolArray.Length));
+            
 
             
             state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
@@ -111,7 +111,7 @@ namespace DCR2
                     newCentroid[i] = float3.zero;
                     fishCountPerSchool[i] = 0;
                 }
-                Debug.Log(FixedString.Format("Number centroids: {0}", newCentroid.Length));
+                
 
                 
                 //Is it alright to name the variables same?

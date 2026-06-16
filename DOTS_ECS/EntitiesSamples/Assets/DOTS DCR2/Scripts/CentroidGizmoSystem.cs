@@ -26,8 +26,14 @@ namespace DCR2
             var centroidQuery = SystemAPI.QueryBuilder().WithAll<centroidGizmoComponent>().WithAll<LocalToWorld>().Build();
             if (centroidQuery.CalculateEntityCount() > 0)
             {
+                // get query of gizmo to have each centroidID
+                var gizmoQuery = SystemAPI.QueryBuilder().WithAll<centroidGizmo>().Build();
+                
+
+                // query and array of fish entities
                 var fishQuery = SystemAPI.QueryBuilder().WithAll<DynamicSchool>().Build();
                 NativeArray<Entity> entityArray = fishQuery.ToEntityArray(Allocator.TempJob);
+                
                 //var centroidVal = state.EntityManager.GetComponentData<DynamicSchool>(entityArray[0]).centroid;
 
                 var localToWorldLookup = SystemAPI.GetComponentLookup<LocalToWorld>();
@@ -46,13 +52,44 @@ namespace DCR2
                 //Debug.Log("Centroid location calc");
                 //Debug.Log(centroidQuery.CalculateEntityCount());
 
+                // check that each gizmo is following a fish of a different school
+                var world = state.WorldUnmanaged;
+                int centroidCount = centroidQuery.CalculateEntityCount();
+                NativeArray<int> uniqueFishID = CollectionHelper.CreateNativeArray<int, RewindableAllocator>(centroidCount, ref world.UpdateAllocator);
+                state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
+                int id = 0;
+                int i = 0;
+                //Debug.Log(FixedString.Format("Centroid count: {0}", centroidCount));
+                foreach (var fishSettings in uniqueFishComponents)
+                {
+                    int schoolID = fishSettings.schoolID;
                 
-                //Put the entity on the position of the centroid of one of the schools
-                var localToWorld = new LocalToWorld
-                        {
-                            Value = float4x4.TRS(localToWorldLookup[entityArray[0]].Position, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
-                        };
-                localToWorldLookup[centroidEntityArray[0]] = localToWorld;
+                    if (id == schoolID)
+                    {
+                        uniqueFishID[id] = i;
+                        id++;
+                        if (id == centroidCount) break;
+                    }
+                    i++;
+                }
+
+                using NativeArray<centroidGizmo> gizmos = gizmoQuery.ToComponentDataArray<centroidGizmo>(Allocator.TempJob);
+                Debug.Log(FixedString.Format("Gizmo count: {0}", gizmos[0].centroidID));
+
+
+
+
+                
+                foreach(var gizmo in gizmos)
+                {
+                    int x = gizmo.centroidID;
+                    // Put the entity on the position of the centroid of one of the schools
+                    var localToWorld = new LocalToWorld
+                            {
+                                Value = float4x4.TRS(localToWorldLookup[entityArray[uniqueFishID[x]]].Position, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
+                            };
+                    localToWorldLookup[centroidEntityArray[x]] = localToWorld;
+                }
             }
         }
     }
