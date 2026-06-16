@@ -167,7 +167,7 @@ MonoBehaviour:
   schoolPrefab: {fileID: 4486779068138296430, guid: c342c7f1ee10d974dbc052f92977402d,
     type: 3}
   spawnRadius: 1
-  spawnCount: 10
+  spawnCount: 5
   schoolID: 1
   schoolCentroid: {fileID: 892711727}
   spawnType: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
   schoolPrefab: {fileID: 4631480815441529564, guid: c89815d400bda4645851c78e0056c8c5,
     type: 3}
   spawnRadius: 1
-  spawnCount: 10
+  spawnCount: 3
   schoolID: 0
   schoolCentroid: {fileID: 1808384570}
   spawnType: 0
@@ -520,7 +520,7 @@ MonoBehaviour:
   schoolPrefab: {fileID: 3693033755697380250, guid: dc869ce0a70a50b4ca601cb676bc3f9e,
     type: 3}
   spawnRadius: 1
-  spawnCount: 10
+  spawnCount: 3
   schoolID: 2
   schoolCentroid: {fileID: 711158447}
   spawnType: 0

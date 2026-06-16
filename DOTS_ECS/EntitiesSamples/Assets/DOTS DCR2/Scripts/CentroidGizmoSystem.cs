@@ -19,7 +19,7 @@ namespace DCR2
     //  Basically, this doens't run OnUpdate until there are entities that match the quesries done in this system (Until we've defined our entity spawner)
     [RequireMatchingQueriesForUpdate]
     [BurstCompile]
-    public partial struct CentroidGigzmoSystem : ISystem
+    public partial struct CentroidGizmoSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
         {

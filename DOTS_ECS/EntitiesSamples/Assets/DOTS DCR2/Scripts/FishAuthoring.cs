@@ -93,6 +93,7 @@ namespace DCR2
     public struct DynamicSchool : IComponentData
     {
         public Vector3 centroid;
+        public Vector3 schoolCentroid;
 
     }
 

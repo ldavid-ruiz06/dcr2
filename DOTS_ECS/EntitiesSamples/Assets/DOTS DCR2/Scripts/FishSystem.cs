@@ -519,12 +519,13 @@ namespace DCR2
             [ReadOnly] public int fishCount;
             [ReadOnly] public int schoolID;
             [ReadOnly] public NativeArray<int> fishCountPerSchool;
+            public float3 schoolCentroid;
 
             void Execute ()
             {
                 //Debug.Log("newCentroid: " + newCentroid[0]);
                 //Debug.LogFormat("newCentroid: {0}, fishCount: {1}", newCentroid[0], fishCount);
-                //Debug.Log(FixedString.Format("fishCountPerSchool: {0}", fishCountPerSchool[schoolID]));
+                //Debug.Log(FixedString.Format("fishCountPerSchool {1}: {0}", fishCountPerSchool[schoolID], schoolID));
                 newCentroid[schoolID] = newCentroid[schoolID]/(float) fishCountPerSchool[schoolID];
                 //Debug.LogFormat("newCentroid: {0}", newCentroid[0]);
             }
