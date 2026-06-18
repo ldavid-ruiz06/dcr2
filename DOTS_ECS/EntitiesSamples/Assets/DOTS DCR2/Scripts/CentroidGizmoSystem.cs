@@ -57,32 +57,31 @@ namespace DCR2
 
                 // this code didnt work, ignore
                 // check that each gizmo is following a fish of a different school
-                // var world = state.WorldUnmanaged;
-                // int centroidCount = centroidQuery.CalculateEntityCount();
-                // NativeArray<int> uniqueFishID = CollectionHelper.CreateNativeArray<int, RewindableAllocator>(centroidCount, ref world.UpdateAllocator);
-                // state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
-                // int id = 0;
-                // int i = 0;
-                // //Debug.Log(FixedString.Format("Centroid count: {0}", centroidCount));
-                // foreach (var fishSettings in uniqueFishComponents)
-                // {
-                //     int schoolID = fishSettings.schoolID;
+                var world = state.WorldUnmanaged;
+                int centroidCount = centroidQuery.CalculateEntityCount();
+                NativeArray<int> uniqueFishID = CollectionHelper.CreateNativeArray<int, RewindableAllocator>(centroidCount, ref world.UpdateAllocator);
+                state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
+                int id = 0;
+                int i = 0;
+                //Debug.Log(FixedString.Format("Centroid count: {0}", centroidCount));
+                foreach (var fishSettings in uniqueFishComponents)
+                {
+                    int schoolID = fishSettings.schoolID;
                 
-                //     if (id == schoolID)
-                //     {
-                //         uniqueFishID[id] = i;
-                //         id++;
-                //         if (id == centroidCount) break;
-                //     }
-                //     i++;
-                // }
+                    if (id == schoolID)
+                    {
+                        uniqueFishID[id] = i;
+                        id++;
+                        if (id == centroidCount) break;
+                    }
+                    i++;
+                }
 
-                // for(i = 0; i < centroidCount; i++)
-                // {
-                //     Debug.Log(FixedString.Format("{0}", uniqueFishID[i]));
-                // }
+                for(i = 0; i < centroidCount; i++)
+                {
+                    Debug.Log(FixedString.Format("{0}", uniqueFishID[i]));
+                }
 
-                // using NativeArray<centroidGizmo> gizmos = gizmoQuery.ToComponentDataArray<centroidGizmo>(Allocator.TempJob);
                 
 
 
@@ -95,11 +94,17 @@ namespace DCR2
                 
                 // Put the entity on the position of the centroid of one of the schools
                 // This code is what makes the gizmo move
-                var localToWorld = new LocalToWorld
-                        {
-                            Value = float4x4.TRS(localToWorldLookup[entityArray[0]].Position, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
-                        };
-                localToWorldLookup[centroidEntityArray[0]] = localToWorld;
+                using NativeArray<centroidGizmo> gizmos = gizmoQuery.ToComponentDataArray<centroidGizmo>(Allocator.TempJob);
+                for (int g = 0; g < centroidCount; g++)
+                {
+                    int x = uniqueFishID[g];
+                    Debug.Log(FixedString.Format("Centroid ID: {0}", x));
+                    var localToWorld = new LocalToWorld
+                            {
+                                Value = float4x4.TRS(localToWorldLookup[entityArray[uniqueFishID[x]]].Position, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
+                            };
+                    localToWorldLookup[centroidEntityArray[g]] = localToWorld;
+                }
 
             }
         }
