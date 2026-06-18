@@ -57,22 +57,47 @@ namespace DCR2
 
                 // this code didnt work, ignore
                 // check that each gizmo is following a fish of a different school
+                // var world = state.WorldUnmanaged;
+                // int centroidCount = centroidQuery.CalculateEntityCount();
+                // NativeArray<int> uniqueFishID = CollectionHelper.CreateNativeArray<int, RewindableAllocator>(centroidCount, ref world.UpdateAllocator);
+                // state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
+                // int id = 0;
+                // int i = 0;
+                // Debug.Log(FixedString.Format("Centroid count: {0}", centroidCount));
+                // Debug.Log(FixedString.Format("uniqueFishComponents.Length: {0}", uniqueFishComponents.Length));
+                // foreach (var fishSettings in uniqueFishComponents)
+                // {
+                //     int schoolID = fishSettings.schoolID;
+                //     Debug.Log(FixedString.Format("Index: {1} SchoolID: {0}", schoolID, i));
+                //     if (id == schoolID)
+                //     {
+                //         uniqueFishID[id] = i;
+                //         id++;
+                //         //if (id == centroidCount) break;
+                //     }
+                //     i++;
+                // }
+
+                // for(i = 0; i < centroidCount; i++)
+                // {
+                //     Debug.Log(FixedString.Format("{0}", uniqueFishID[i]));
+                // }
+
+                // attempt 2 of getting id of fish in different schools
                 var world = state.WorldUnmanaged;
+                NativeArray<Entity> fishEntities = fishQuery.ToEntityArray(Allocator.Temp);
                 int centroidCount = centroidQuery.CalculateEntityCount();
                 NativeArray<int> uniqueFishID = CollectionHelper.CreateNativeArray<int, RewindableAllocator>(centroidCount, ref world.UpdateAllocator);
-                state.EntityManager.GetAllUniqueSharedComponents(out NativeList<SemiStaticSchool> uniqueFishComponents, world.UpdateAllocator.ToAllocator);
-                int id = 0;
+                int id = -1;
                 int i = 0;
-                //Debug.Log(FixedString.Format("Centroid count: {0}", centroidCount));
-                foreach (var fishSettings in uniqueFishComponents)
+                foreach (var entity in fishEntities)
                 {
-                    int schoolID = fishSettings.schoolID;
-                
-                    if (id == schoolID)
+                    SemiStaticSchool school = state.EntityManager.GetSharedComponentManaged<SemiStaticSchool>(entity);
+                    Debug.Log(FixedString.Format("Entity {1} schoolID: {0}", school.schoolID, i));
+                    if (id != school.schoolID)
                     {
+                        id = school.schoolID;
                         uniqueFishID[id] = i;
-                        id++;
-                        if (id == centroidCount) break;
                     }
                     i++;
                 }
@@ -81,10 +106,6 @@ namespace DCR2
                 {
                     Debug.Log(FixedString.Format("{0}", uniqueFishID[i]));
                 }
-
-                
-
-
 
                 
 
@@ -98,10 +119,10 @@ namespace DCR2
                 for (int g = 0; g < centroidCount; g++)
                 {
                     int x = uniqueFishID[g];
-                    Debug.Log(FixedString.Format("Centroid ID: {0}", x));
+                    //Debug.Log(FixedString.Format("uniqueFish ID: {0}", x));
                     var localToWorld = new LocalToWorld
                             {
-                                Value = float4x4.TRS(localToWorldLookup[entityArray[uniqueFishID[x]]].Position, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
+                                Value = float4x4.TRS(localToWorldLookup[entityArray[x]].Position, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
                             };
                     localToWorldLookup[centroidEntityArray[g]] = localToWorld;
                 }
