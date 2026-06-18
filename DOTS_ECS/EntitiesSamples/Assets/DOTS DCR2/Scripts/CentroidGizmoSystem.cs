@@ -102,16 +102,6 @@ namespace DCR2
                     i++;
                 }
 
-                // for(i = 0; i < centroidCount; i++)
-                // {
-                //     Debug.Log(FixedString.Format("{0}", uniqueFishID[i]));
-                // }
-
-                
-
-
-                
-            
                 
                 // Put the entity on the position of the centroid of one of the schools
                 // This code is what makes the gizmo move
@@ -120,11 +110,11 @@ namespace DCR2
                 {
                     int x = uniqueFishID[g];
                     //Debug.Log(FixedString.Format("uniqueFish ID: {0}", x));
-                    var centroidVal = state.EntityManager.GetComponentData<DynamicSchool>(entityArray[x]).centroid;
+                    var centroidVal = state.EntityManager.GetComponentData<DynamicSchool>(entityArray[x]).schoolCentroid;
                     var localToWorld = new LocalToWorld
                             {
-                                // Value = float4x4.TRS(localToWorldLookup[entityArray[x]].Position, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
                                 Value = float4x4.TRS(centroidVal, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
+                               // Value = float4x4.TRS(centroidVal, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))
                             };
                     localToWorldLookup[centroidEntityArray[g]] = localToWorld;
                 }

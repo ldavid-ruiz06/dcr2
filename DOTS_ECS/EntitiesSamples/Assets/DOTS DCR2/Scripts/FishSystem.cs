@@ -187,8 +187,15 @@ namespace DCR2
 
                 state.Dependency = assignCentroidFinalDirectionBarrierJobHandle;
 
+                
+                // foreach(var x in newCentroid)
+                // {
+                //     Debug.Log(FixedString.Format("Centroid: ({0})", x.ToString()));
+                // }
+
                 fishQuery.AddDependency(state.Dependency);
                 fishQuery.ResetFilter();
+
 
                 //TODO :: define the calculate distnce from centroid job
                     //Calculate distance from centroid, update the goToCentroid variable if need be and calculate direction towards centroid, put it in the centroidFollowingDirection array
@@ -527,7 +534,8 @@ namespace DCR2
                 //Debug.LogFormat("newCentroid: {0}, fishCount: {1}", newCentroid[0], fishCount);
                 //Debug.Log(FixedString.Format("fishCountPerSchool {1}: {0}", fishCountPerSchool[schoolID], schoolID));
                 newCentroid[schoolID] = newCentroid[schoolID]/(float) fishCountPerSchool[schoolID];
-                //Debug.LogFormat("newCentroid: {0}", newCentroid[0]);
+                //Debug.Log(FixedString.Format("newCentroid: {0}", newCentroid[schoolID].x));
+                schoolCentroid = newCentroid[schoolID];
             }
         }
         //TODO :: Put new Centroid Job
