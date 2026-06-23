@@ -111,7 +111,7 @@ namespace DCR2
                 {
                     int x = uniqueFishID[g];
                     //Debug.Log(FixedString.Format("uniqueFish ID: {0}", x));
-                    var centroidVal = state.EntityManager.GetComponentData<DynamicSchool>(entityArray[x]).schoolCentroid;
+                    var centroidVal = state.EntityManager.GetComponentData<DynamicSchool>(entityArray[x]).centroid;
                     var localToWorld = new LocalToWorld
                             {
                                 Value = float4x4.TRS(centroidVal, quaternion.LookRotationSafe(new float3(0f,0f,0f), math.up()), new float3(10.0f, 10.0f, 10.0f))

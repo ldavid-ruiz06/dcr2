@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   schoolID: 0
-  normalSpeed: 0.03
+  normalSpeed: 2
   acceleration: 1
   rotationSpeed: 3.2
   couzinDirectionWeight: 1

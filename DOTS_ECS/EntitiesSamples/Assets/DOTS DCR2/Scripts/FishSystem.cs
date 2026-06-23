@@ -515,7 +515,7 @@ namespace DCR2
                 //Debug.Log(newCentroid[0] + localToWorld.Position);
                 newCentroid[schoolID] = newCentroid[schoolID] + localToWorld.Position;
                 fishCountPerSchool[schoolID]++;
-                //Debug.LogFormat("newCentroid: {0}", newCentroid[0]);
+                //Debug.Log(FixedString.Format("Position: ({0}, {1}, {2})", (float)localToWorld.Position.x, (float)localToWorld.Position.y, (float)localToWorld.Position.z));
             }
         }
 
@@ -530,12 +530,26 @@ namespace DCR2
 
             void Execute ()
             {
+                // calculation mean by steps cuz theres something fishy going on
+                float x = newCentroid[schoolID].x;
+                float y = newCentroid[schoolID].y;
+                float z = newCentroid[schoolID].z;
+
+                x = x / (float) fishCountPerSchool[schoolID];
+                y = y / (float) fishCountPerSchool[schoolID];
+                z = z / (float) fishCountPerSchool[schoolID];
+
+                Debug.Log(FixedString.Format("Manual Mean: ({0}, {1}, {2})", x, y, z));
+
+
                 //Debug.Log("newCentroid: " + newCentroid[0]);
                 //Debug.LogFormat("newCentroid: {0}, fishCount: {1}", newCentroid[0], fishCount);
                 //Debug.Log(FixedString.Format("fishCountPerSchool {1}: {0}", fishCountPerSchool[schoolID], schoolID));
-                newCentroid[schoolID] = newCentroid[schoolID]/(float) fishCountPerSchool[schoolID];
-                //Debug.Log(FixedString.Format("newCentroid: {0}", newCentroid[schoolID].x));
+                //Debug.Log(FixedString.Format("fishCountPerSchool {1}: {0}", fishCountPerSchool[schoolID], schoolID));
+                newCentroid[schoolID] = newCentroid[schoolID]/ (float)fishCountPerSchool[schoolID];
                 schoolCentroid = newCentroid[schoolID];
+
+
             }
         }
         //TODO :: Put new Centroid Job
@@ -548,7 +562,7 @@ namespace DCR2
             void Execute(ref DynamicSchool dynamicSchool)
             {
                 dynamicSchool.centroid = newCentroid[schoolID];
-                Debug.Log(FixedString.Format("newCentroid: ({0}, {1}, {2}", (float)dynamicSchool.centroid.x, (float)dynamicSchool.centroid.y, (float)dynamicSchool.centroid.z));
+                Debug.Log(FixedString.Format("Centroid: ({0}, {1}, {2})", dynamicSchool.centroid.x, dynamicSchool.centroid.y, dynamicSchool.centroid.z));
             }
         }
 
