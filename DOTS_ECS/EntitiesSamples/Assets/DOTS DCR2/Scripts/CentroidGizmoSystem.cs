@@ -19,7 +19,7 @@ namespace DCR2
     // there are no entities found in the EntityQueries that you do
     //  Basically, this doens't run OnUpdate until there are entities that match the quesries done in this system (Until we've defined our entity spawner)
     [RequireMatchingQueriesForUpdate]
-    [UpdateAfter(typeof(FishSystem))]
+    //[UpdateAfter(typeof(FishSystem))]
     [BurstCompile]
     public partial struct CentroidGizmoSystem : ISystem
     {
@@ -124,10 +124,10 @@ namespace DCR2
 
 
 
-                var getCentroidJob = new GetCentroid
-                {
+                // var getCentroidJob = new GetCentroid
+                // {
                     
-                };
+                // };
                 //var getCentroidJobHandle = getCentroidJob.Schedule(calculateCentroidMeanJobHandle);
 
             }
@@ -135,15 +135,15 @@ namespace DCR2
 
 
         // job to get the new centroid after calculation of the mean
-        [BurstCompile]
-        partial struct GetCentroid : IJobEntity
-        {
+        // [BurstCompile]
+        // partial struct GetCentroid : IJobEntity
+        // {
             
-            void Execute ()
-            {
+        //     void Execute ()
+        //     {
                 
-            }
-        }
+        //     }
+        // }
     }
 }
 

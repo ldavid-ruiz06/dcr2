@@ -548,6 +548,7 @@ namespace DCR2
             void Execute(ref DynamicSchool dynamicSchool)
             {
                 dynamicSchool.centroid = newCentroid[schoolID];
+                Debug.Log(FixedString.Format("newCentroid: ({0}, {1}, {2}", (float)dynamicSchool.centroid.x, (float)dynamicSchool.centroid.y, (float)dynamicSchool.centroid.z));
             }
         }
 
